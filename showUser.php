@@ -18,7 +18,6 @@ if($role_user != "administrateur")
     <?php require_once 'navbar.php'; ?>
 
     <div class="container">
-        <h2 class="title_form">Liste des salariés au sein de l'entreprise</h2>
         <?php
         if (isset($_GET['tech_id'])) {
             $id = $_GET['tech_id'];
