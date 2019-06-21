@@ -40,6 +40,7 @@ body.login {
 
 .btn_valider{
     width: 100%;
+    margin-top:20px;
 }
 
 .block{
@@ -55,4 +56,14 @@ body.login {
 }
 .margintop25{
     margin-top:25px;
+}
+
+.min-width{
+    min-width: 110px;
+}
+
+.btn_piece{
+    margin-bottom: 15px;
+    margin-left:20px;
+    width:200px;
 }

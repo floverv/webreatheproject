@@ -17,21 +17,21 @@
                             Gestion des salariés
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="newUser.php">Ajouter un salarié</a>
-                            <a class="dropdown-item" href="showUser.php">Modifier un salarié</a>
+                            <a class="dropdown-item" href="addEmployee.php">Ajouter un salarié</a>
+                            <a class="dropdown-item" href="listEmployees.php">Modifier un salarié</a>
                         </div>
                     </li>';
                 }
                 if($role_user == "gestionnaire")
                 {
                     echo'<li class="nav-item">
-                            <a class="nav-link" href="vehicule.php">Gestion des véhicules</a>
+                            <a class="nav-link" href="addVehicule.php">Gestion des véhicules</a>
                         </li>';
                 }
                 if($role_user == "technicien")
                 {
                     echo'<li class="nav-item">
-                        <a class="nav-link" href="problem_vehicule.php">Tableau de bord</span></a>
+                        <a class="nav-link" href="dashboard.php">Tableau de bord</span></a>
                     </li>';
 
                     echo'<li class="nav-item dropdown">
@@ -39,11 +39,10 @@
                                 Gestion des opérations de maintenance
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="showMaintenance.php">Liste des opérations de maintenance</a>
-                                <a class="dropdown-item" href="maintenance.php">Ajouter une opération de maintenance</a>
-                                <a class="dropdown-item" href="user_maintenance.php">Affecter un technicien</a>
-                                <a class="dropdown-item" href="noter_maintenance.php">Noter une opération</a>
-                                <a class="dropdown-item" href="image_maintenance.php">Ajouter des photos</a>
+                                <a class="dropdown-item" href="listMaintenances.php">Liste des opérations de maintenance</a>
+                                <a class="dropdown-item" href="addMaintenance.php">Ajouter une opération de maintenance</a>
+                                <a class="dropdown-item" href="addNoteMaintenance.php">Noter une opération</a>
+                                <a class="dropdown-item" href="addPictureMaintenance.php">Ajouter des photos</a>
                             </div>
                     </li>';
 
@@ -52,8 +51,8 @@
                                 Gestion des véhicules
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="problem_vehicule.php">Liste des véhicules</span></a>
-                                <a class="nav-link" href="problem_vehicule.php">Signaler un problème véhicule</span></a>
+                                <a class="nav-link" href="listVehicules.php">Liste des véhicules</span></a>
+                                <a class="nav-link" href="addProblemVehicule.php">Signaler un problème véhicule</span></a>
                             </div>
                     </li>';
                 }

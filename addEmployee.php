@@ -23,7 +23,7 @@ if($role_user != "administrateur")
                 <strong>Ajouter un nouveau salarié</strong>
             </div>
             <section class="block">
-                <form action="newUser.php?insert" method="post">
+                <form action="addEmployee.php?insert" method="post">
                     <div class="form-group">
                         <label for="selectUser">Sélectionner l'utilisateur</label>
                         <select class="form-control" name="select_new_user" required>

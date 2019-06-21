@@ -1,7 +1,7 @@
 <html>
 <?php
 require 'config/session.php';
-require 'function/checkImmatriculation.php';
+require 'function/check.php';
 require 'function/getRequete.php';
 require 'header.php';
 if ($role_user != "technicien") {
@@ -41,7 +41,7 @@ if ($role_user != "technicien") {
                 $requete = $db->prepare($sql);
                 if($dateDebut>$today)
                 {
-                    $etat = "pas commence";
+                    $etat = "en attente";
                 }
                 else{
                     $etat = "en cours";
@@ -97,7 +97,7 @@ if ($role_user != "technicien") {
                 <strong>Ajout d'une opération de maintenance</strong>
             </div>
             <section class="block">
-                <form action="maintenance.php?insert" method="post">
+                <form action="addMaintenance.php?insert" method="post">
                     <div class="form-group">
                         <label for="selectUser">Date de début</label>
                         <input type="text" class="form-control" name="date_debut" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" placeholder="Veuillez rentrer la date de début" required>

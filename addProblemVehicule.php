@@ -1,7 +1,7 @@
 <html>
 <?php
 require 'config/session.php';
-require 'function/checkImmatriculation.php';
+require 'function/check.php';
 require 'header.php';
 if ($role_user != "technicien") {
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
@@ -33,7 +33,7 @@ if ($role_user != "technicien") {
 
                 if(!checkImmat($immat))
                 {
-                    echo "<script type='text/javascript'>window.location.href='problem_vehicule.php?unknow';</script>";
+                    echo "<script type='text/javascript'>window.location.href='addProblemVehicule.php?unknow';</script>";
                     die();  
                 }
 
@@ -41,7 +41,7 @@ if ($role_user != "technicien") {
 
                 if($immat=="" || $raison=="" || !preg_match($pattern_immat,$immat) )
                 {
-                    echo "<script type='text/javascript'>window.location.href='problem_vehicule.php';</script>";
+                    echo "<script type='text/javascript'>window.location.href='addProblemVehicule.php';</script>";
                     die();
                 }
                 else{
@@ -59,7 +59,7 @@ if ($role_user != "technicien") {
                 <strong>Ajout d'un problème pour un véhicule</strong>
             </div>
             <section class="block">
-                <form action="problem_vehicule.php?insert" method="post">
+                <form action="addProblemVehicule.php?insert" method="post">
                     <div class="form-group">
                         <label for="selectUser">immatriculation</label>
                         <input type="text" class="form-control" name="immatriculation" pattern="[A-HJ-NP-TVX-Z]{2}-[0-9]{3}-[A-HJ-NP-TVX-Z]{2}" placeholder="Veuillez rentrer l'immatriculation" required>

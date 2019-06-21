@@ -14,6 +14,7 @@
     $role_user = getRole($id_user);
   }
   else{
-    echo "<script type='text/javascript'>window.location.href='../index.php';</script>";
+    echo "<script type='text/javascript'>window.location.href='index.php';</script>";
+    die();
   }
 ?>

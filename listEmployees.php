@@ -53,12 +53,12 @@ if($role_user != "administrateur")
                     </thead>
                     <tbody>
                         <?php
-                        $result = $db->query('SELECT t.id_user,u.name from techniciens t,users u WHERE t.id_user = u.id');
+                        $result = $db->query('SELECT t.id_user,u.name from techniciens t,users u WHERE t.id_user = u.id ORDER BY u.name ASC ');
                         $i = 0;
                         while ($row = $result->fetch()) {
                             $i++;
                             echo '
-                                <form action="showUser.php?tech_id=' . $row['id_user'] . '" method="post" class="form-horizontal">
+                                <form action="listEmployees.php?tech_id=' . $row['id_user'] . '" method="post" class="form-horizontal">
                                     <tr>
                                         <td class="center">' . $row['id_user'] . '</td>
                                         <td class="center">' . $row['name'] . '</td>
@@ -87,12 +87,12 @@ if($role_user != "administrateur")
                     </thead>
                     <tbody>
                         <?php
-                        $result = $db->query('SELECT g.id_user,u.name from gestionnaires g,users u WHERE g.id_user = u.id');
+                        $result = $db->query('SELECT g.id_user,u.name from gestionnaires g,users u WHERE g.id_user = u.id ORDER BY u.name ASC');
                         $i = 0;
                         while ($row = $result->fetch()) {
                             $i++;
                             echo '
-                                <form action="showUser.php?gest_id=' . $row['id_user'] . '" method="post" class="form-horizontal">
+                                <form action="listEmployees.php?gest_id=' . $row['id_user'] . '" method="post" class="form-horizontal">
                                     <tr>
                                         <td class="center">' . $row['id_user'] . '</td>
                                         <td class="center">' . $row['name'] . '</td>

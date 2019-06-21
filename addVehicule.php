@@ -29,7 +29,7 @@ Variables:
 
                 if($immat=="" || $type=="" || $date_achat == "" || !preg_match($pattern_immat,$immat) || !preg_match($pattern_date,$date_achat) )
                 {
-                    echo "<script type='text/javascript'>window.location.href='vehicule.php';</script>";
+                    echo "<script type='text/javascript'>window.location.href='addVehicule.php';</script>";
                     die();
                 }
                 else{
@@ -49,7 +49,7 @@ Variables:
                 <strong>Ajout d'un véhicule</strong>
             </div>
             <section class="block">
-                <form action="vehicule.php?insert" method="post">
+                <form action="addVehicule.php?insert" method="post">
                     <div class="form-group">
                         <label for="selectUser">immatriculation</label>
                         <input type="text" class="form-control" name="immatriculation" pattern="[A-HJ-NP-TVX-Z]{2}-[0-9]{3}-[A-HJ-NP-TVX-Z]{2}" placeholder="Veuillez rentrer l'immatriculation" required>
@@ -107,7 +107,7 @@ Variables:
                         while ($row = $result->fetch()) {
                             $i++;
                             echo '
-                                <form action="vehicule.php?immat='.$row['immatriculation'].'" method="post" class="form-horizontal">
+                                <form action="addVehicule.php?immat='.$row['immatriculation'].'" method="post" class="form-horizontal">
                                     <tr>
                                         <td class="center">' . $row['immatriculation'] . '</td>
                                         <td class="center">' . $row['type'] . '</td>
