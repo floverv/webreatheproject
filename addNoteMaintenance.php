@@ -37,7 +37,7 @@ if ($role_user != "technicien") {
             $requete = $db->prepare($sql);
             $requete->execute([$note,$id_maintenance,$id_user]);
         }
-        echo "<script type='text/javascript'>window.location.href='showMoreMaintenance?id=".$id_maintenance."#note';</script>";        
+        echo "<script type='text/javascript'>window.location.href='showMaintenance?id=".$id_maintenance."#note';</script>";        
     }
     ?>
 

@@ -12,15 +12,15 @@
             <?php
                 if($role_user == "administrateur")
                 {
-                    echo'<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Gestion des salariés
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="addEmployee.php">Ajouter un salarié</a>
-                            <a class="dropdown-item" href="listEmployees.php">Modifier un salarié</a>
-                        </div>
+                    echo'<li class="nav-item">
+                            <a class="nav-link" href="addEmployee.php">Affecter un salarié</a>
+                        </li>';
+                    echo'<li class="nav-item">
+                        <a class="nav-link" href="listEmployees.php">Modifier un salarié</a>
                     </li>';
+                    echo'<li class="nav-item">
+                            <a class="nav-link" href="addUser.php">Créer un salarié</a>
+                        </li>';
                 }
                 if($role_user == "gestionnaire")
                 {

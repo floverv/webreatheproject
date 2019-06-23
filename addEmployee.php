@@ -32,7 +32,7 @@ if($role_user != "administrateur")
                             $sql = "SELECT * FROM users";
                             $result = $db->query($sql);
                             while ($row = $result->fetch()) {
-                                echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+                                echo '<option value="' . $row['id'] . '">' . $row['id'] . ' - ' . $row['name'] . '</option>';
                             }
 
                             ?>

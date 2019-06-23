@@ -15,7 +15,7 @@ require 'header.php';
     ?>
 
     <!-- Jumbotron -->
-    <div class="card card-image" style="background-image: url(https://www.heet.org.uk/wp-content/uploads/2016/06/gradient-background-26046-26731-hd-wallpapers.jpg.png);background-repeat: round;">
+    <div class="card card-image" style="background-image: url(Common/Private/gradient-background.png);background-repeat: round;">
         <div class="text-white text-center rgba-stylish-strong py-5 px-4">
             <div class="py-5">
                 <!-- Content -->
