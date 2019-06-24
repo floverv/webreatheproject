@@ -158,7 +158,7 @@ if (isset($_GET['id'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $result = $db->query('SELECT DISTINCT l.id_pieces,p.libelle FROM maintenance m,listepieces l,pieces p WHERE m.id = "' . $id_maintenance . '" AND p.id = l.id_pieces ');
+                                $result = $db->query('SELECT DISTINCT l.id_pieces,p.libelle FROM maintenance m,listepieces l,pieces p WHERE m.id = l.id_maintenance AND l.id_maintenance = "' . $id_maintenance . '" AND p.id = l.id_pieces ');
                                 $i = 0;
                                 while ($row = $result->fetch()) {
                                     echo '
@@ -314,7 +314,7 @@ if (isset($_GET['id'])) {
                             <tbody>
                                 <?php
 
-                                $result = $db->query('SELECT DISTINCT n.note,u.name
+                                $result = $db->query('SELECT DISTINCT n.note,u.name,n.id_technicien
                                 FROM techniciens t,users u,notemaintenance n,affectermaintenance a
                                 WHERE u.id = t.id_user
                                 AND t.id_user = n.id_technicien
@@ -323,12 +323,20 @@ if (isset($_GET['id'])) {
                                 AND n.id_maintenance = '.$id_maintenance.'');
 
                                 while ($row = $result->fetch()) {
+                                    $echo = false;
+                                    if($row['id_technicien'] == $id_user)
+                                    {
+                                        $echo = true;
+                                    }
                                     echo '
                                     <tr>
                                         <td class="center">' . $row['name'] . '</td>
-                                        <td class="center">' . $row['note']  . ' / 5</td>
-                                        <td class="center"><a href="addNoteMaintenance.php" class="btn btn-primary">Modifier</a></td>
-                                    </tr>';
+                                        <td class="center">' . $row['note']  . ' / 5</td>';
+                                        if($echo)
+                                        {
+                                            echo'<td class="center"><a href="addNoteMaintenance.php" class="btn btn-primary">Modifier</a></td>';
+                                        }
+                                    echo'</tr>';
                                 }
                                 ?>
                             </tbody>
@@ -344,10 +352,12 @@ if (isset($_GET['id'])) {
             <?php
                 if(isset($_GET['delete']))
                 {
-                    $id_picture = $_GET['delete'];
+                    
+                    $id_picture = $_GET['delete'];        
 
                     if($id_picture != ""){
                         $db->query("DELETE FROM photomaintenance WHERE id='".$id_picture."' ");
+
                         echo '<div class="alert alert-success margintop25" role="alert">La photo a bien été supprimée.</div>';
                     }
                 }

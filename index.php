@@ -8,6 +8,7 @@
         <div class="login_form">
             <form action="config/connexion.php" method="POST">
                 <legend>Se connecter</legend>
+                <small class="form-text text-muted">Pour obtenir un compte veuillez contacter l'administrateur</small>
                 <?php
                     if(isset($_GET['error_session'])){
                         echo'<p style="color:red;">Aucun identifiant correspondant</p>';
@@ -30,7 +31,6 @@
                     <input class="form-control" name="password" type="password" placeholder="Mot de passe" required/>
                 </div>
                 <div class="form-group text-center gp_btn">
-                    <a href="#" class="btn btn-primary btn_register">S'enregistrer</a>
                     <input type="submit" class="btn btn-success" value="Se connecter" />
                 </div>
             </form>

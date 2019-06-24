@@ -15,7 +15,7 @@ require 'header.php';
     ?>
 
     <!-- Jumbotron -->
-    <div class="card card-image" style="background-image: url(Common/Private/gradient-background.png);background-repeat: round;">
+    <div class="card card-image" style="background-image: url(common/Pictures/Public/gradient-background.png);background-repeat: round;">
         <div class="text-white text-center rgba-stylish-strong py-5 px-4">
             <div class="py-5">
                 <!-- Content -->
@@ -34,7 +34,7 @@ require 'header.php';
 
                 <!--Card image-->
                 <div class="view overlay">
-                    <img class="card-img-top" src="Common/Private/mecanic.jpg"/>                    
+                    <img class="card-img-top" src="common/Pictures/Public/mecanic.jpg"/>                    
                 <a href="#!">
                         <div class="mask rgba-white-slight"></div>
                     </a>
@@ -60,7 +60,7 @@ require 'header.php';
 
                 <!--Card image-->
                 <div class="view overlay">
-                    <img class="card-img-top" src="Common/Private/maintenance.jpg"/>
+                    <img class="card-img-top" src="common/Pictures/Public/maintenance.jpg"/>
                 </div>
 
                 <!--Card content-->
@@ -83,7 +83,7 @@ require 'header.php';
 
                 <!--Card image-->
                 <div class="view overlay">
-                    <img class="card-img-top" src="Common/Private/car.jpg" height="95%" alt="Card image cap">
+                    <img class="card-img-top" src="common/Pictures/Public/car.jpg" height="95%" alt="Card image cap">
                 </div>
 
                 <!--Card content-->

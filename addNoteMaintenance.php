@@ -60,7 +60,7 @@ if ($role_user != "technicien") {
                             AND a.id_user = '".$id_user."'";
                             $result = $db->query($sql);
                             while ($row = $result->fetch()) {
-                                echo '<option value="' . $row['id'] . '">' . $row['sujet'] . '</option>';
+                                echo '<option value="' . $row['id'] . '">' . $row['id'] . ' - ' . $row['sujet'] . '</option>';
                             }
 
                             ?>

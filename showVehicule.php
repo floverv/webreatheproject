@@ -88,7 +88,9 @@ require 'header.php';
                             $result = $db->prepare('SELECT m.id,m.dateDebut,m.dateFin,m.sujet,m.etatAvancement
                             FROM maintenance m,problemevehicule p
                             WHERE m.id_probleme=p.id
-                            AND	p.immatriculation = ?');
+                            AND	p.immatriculation = ? 
+                            ORDER BY m.dateFin desc
+                            ');
                             $result->execute([$immat]);
 
                             while ($row = $result->fetch()) {

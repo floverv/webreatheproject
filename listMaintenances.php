@@ -22,16 +22,12 @@ if($role_user != "technicien")
 
     if(isset($_GET['id']))
     {
-        $id_maintenance = $_GET['id'];
-        $dateDebut = $_POST['dateDebut'];
-        $dateFin = $_POST['dateFin'];
-        $sujet = $_POST['sujet'];
-        $description = $_POST['description'];
         $etat = $_POST['etat'];
+        $id_maintenance = $_GET['id'];
 
-        $sql = "UPDATE `maintenance` SET `dateDebut`=?,`dateFin`=?,`sujet`=?,`description`=?,`etatAvancement`=? WHERE id =?";
+        $sql = "UPDATE `maintenance` SET `etatAvancement`=? WHERE id =?";
         $requete = $db->prepare($sql);
-        $requete->execute([$dateDebut,$dateFin,$sujet,$description,$etat,$id_maintenance]);
+        $requete->execute([$etat,$id_maintenance]);
 
         echo '<div class="alert alert-success margintop25" role="alert">La liste a bien été mise à jour.</div>';
     }
@@ -65,10 +61,10 @@ if($role_user != "technicien")
                                 <form id="ligne'.$i.'" action="listMaintenances.php?id='.$row['id'].'#ligne'.$i.'" method="post" class="form-horizontal">
                                     <tr>
                                         <td class="center">' . $row['id'] . '</td>
-                                        <td class="center"><input type="text" class="form-control" name="dateDebut" value="'.$row['dateDebut'].'"></td>
-                                        <td class="center"><input type="text" class="form-control" name="dateFin" value="'.$row['dateFin'].'"></td>
-                                        <td class="center"><input type="text" class="form-control" name="sujet" value="'.$row['sujet'].'"></td>
-                                        <td class="center"><textarea name="description" class="form-control">'.$row['description'].'</textarea></td>
+                                        <td class="center">'.$row['dateDebut'].'</td>
+                                        <td class="center">'.$row['dateFin'].'</td>
+                                        <td class="center">'.$row['sujet'].'</td>
+                                        <td class="center">'.$row['description'].'</td>
                                         <td class="center"><select class="form-control" name="etat">
                                             <option disabled>Choisir un etat</option>
                                             <option value="en attente" '; if($row['etatAvancement'] == "en attente"){echo'selected';} echo'>En attente</option>
@@ -114,10 +110,10 @@ if($role_user != "technicien")
                                 <form id="ligne'.$i.'" action="listMaintenances.php?id='.$row['id'].'#ligne'.$i.'" method="post" class="form-horizontal">
                                     <tr>
                                         <td class="center">' . $row['id'] . '</td>
-                                        <td class="center"><input type="text" class="form-control" name="dateDebut" value="'.$row['dateDebut'].'"></td>
-                                        <td class="center"><input type="text" class="form-control" name="dateFin" value="'.$row['dateFin'].'"></td>
-                                        <td class="center"><input type="text" class="form-control" name="sujet" value="'.$row['sujet'].'"></td>
-                                        <td class="center"><textarea name="description" class="form-control">'.$row['description'].'</textarea></td>
+                                        <td class="center">'.$row['dateDebut'].'</td>
+                                        <td class="center">'.$row['dateFin'].'</td>
+                                        <td class="center">'.$row['sujet'].'</td>
+                                        <td class="center">'.$row['description'].'</td>
                                         <td class="center"><select class="form-control" name="etat">
                                             <option disabled>Choisir un etat</option>
                                             <option value="en attente" '; if($row['etatAvancement'] == "en attente"){echo'selected';} echo'>En attente</option>
