@@ -1,8 +1,20 @@
 <html>
-    <title>WE BREATHE</title>
+    <head>
+        <!DOCTYPE html>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+
+        <title>WE BREATHE</title>
+
+        <link rel="stylesheet" href="asset/main.css">
+        
+        <script src="vendor/js/Chart.js"></script>
+    </head>
 <?php
 require 'config/session.php';
-require 'header.php';
 /* 
         Variables:
             $id_user : id de l'utilisateur connecté,
@@ -45,7 +57,7 @@ require 'header.php';
                 <div class="card-body">
 
                     <!--Title-->
-                    <h4 class="card-title">Changement de pièces</h4>
+                    <h4 class="card-title">Changements de pièces automobile</h4>
                     <!--Text-->
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste at adipisci placeat, itaque quos quaerat voluptatum magni recusandae velit odit perspiciatis incidunt necessitatibus, dolores nemo, distinctio perferendis saepe pariatur assumenda?</p>
                     <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
@@ -68,7 +80,7 @@ require 'header.php';
                 <div class="card-body">
 
                     <!--Title-->
-                    <h4 class="card-title">Maintenance efficace</h4>
+                    <h4 class="card-title">Maintenances efficaces</h4>
                     <!--Text-->
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit dolores vero architecto voluptas! Dolorum culpa quidem excepturi exercitationem ad sed quaerat fuga quasi dolor dolore ut, ipsum repudiandae omnis impedit!</p>
                     <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
@@ -91,7 +103,7 @@ require 'header.php';
                 <div class="card-body" style="margin-top:-15px;">
 
                     <!--Title-->
-                    <h4 class="card-title">Accessible pour toutes les voiture</h4>
+                    <h4 class="card-title">Accessible pour tous les véhicules</h4>
                     <!--Text-->
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid enim unde inventore, ab, corrupti dignissimos deleniti voluptatem animi debitis amet facilis praesentium provident saepe aperiam dolor quo dolores optio</p>
                     <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->

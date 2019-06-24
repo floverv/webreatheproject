@@ -55,7 +55,7 @@ if($role_user != "technicien")
                     </thead>
                     <tbody>
                         <?php
-                        $result = $db->query('SELECT * FROM maintenance');
+                        $result = $db->query('SELECT * FROM maintenance ORDER BY dateFin desc');
                         while ($row = $result->fetch()) {
                             // RETOURNE TOUS LES MAINTENANCES DE LA BDD
                             echo '
@@ -104,7 +104,7 @@ if($role_user != "technicien")
                     </thead>
                     <tbody>
                         <?php
-                        $result = $db->query('SELECT DISTINCTROW * FROM maintenance m,affectermaintenance a WHERE a.id_user = "'.$id_user.'" AND m.id = a.id_maintenance ');
+                        $result = $db->query('SELECT DISTINCTROW * FROM maintenance m,affectermaintenance a WHERE a.id_user = "'.$id_user.'" AND m.id = a.id_maintenance ORDER BY m.dateFin desc ');
                         while ($row = $result->fetch()) {
                             // RETOURNE TOUTES LES OPERATIONS ASSOCIE A LUTILISATEUR EN SESSION
                             echo '
