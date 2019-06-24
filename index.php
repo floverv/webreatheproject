@@ -4,19 +4,22 @@
 
 <body class="login">
     <div class="container">
-        <strong><h1 class="title">WeBreathe</h1></strong>
+        <strong><h1 class="title">WeBreathe - connexion</h1></strong>
         <div class="login_form">
             <form action="config/connexion.php" method="POST">
                 <legend>Se connecter</legend>
                 <small class="form-text text-muted">Pour obtenir un compte veuillez contacter l'administrateur</small>
                 <?php
                     if(isset($_GET['error_session'])){
+                        // ERREUR DE SESSION
                         echo'<p style="color:red;">Aucun identifiant correspondant</p>';
                     }
                     if(isset($_GET['error_password'])){
+                        // ERREUR DE MOT DE PASSE
                         echo'<p style="color:red;">Mauvais mot de passe ou email</p>';
                     }
                     if(isset($_GET['deconnexion'])){
+                        // MESSAGE DE DECONNEXION
                         echo'<p style="color:green;">Vous avez bien été deconnecté</p>';
                     }
                 ?>

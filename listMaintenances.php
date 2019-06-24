@@ -1,4 +1,5 @@
 <html>
+    <title>Liste des maintenances</title>
 <?php
 require 'config/session.php';
 require 'header.php';
@@ -20,6 +21,7 @@ if($role_user != "technicien")
     <div class="container">
     <?php
 
+    // MODIFICATION DE LETAT DE LOPERATION SI UN ID EST RECU
     if(isset($_GET['id']))
     {
         $etat = $_POST['etat'];
@@ -54,11 +56,10 @@ if($role_user != "technicien")
                     <tbody>
                         <?php
                         $result = $db->query('SELECT * FROM maintenance');
-                        $i = 0;
                         while ($row = $result->fetch()) {
-                            $i++;
+                            // RETOURNE TOUS LES MAINTENANCES DE LA BDD
                             echo '
-                                <form id="ligne'.$i.'" action="listMaintenances.php?id='.$row['id'].'#ligne'.$i.'" method="post" class="form-horizontal">
+                                <form action="listMaintenances.php?id='.$row['id'].'" method="post" class="form-horizontal">
                                     <tr>
                                         <td class="center">' . $row['id'] . '</td>
                                         <td class="center">'.$row['dateDebut'].'</td>
@@ -75,6 +76,7 @@ if($role_user != "technicien")
                                         <td class="center"><input type="submit" class="btn btn-success" value="Enregistrer"></td>
                                     </tr>
                                 </form>';
+                                // REDIRECTION AVEC VOIR PLUS VERS LOPERATION ASSOCIÉE
                         }
                         ?>
                     </tbody>
@@ -103,11 +105,10 @@ if($role_user != "technicien")
                     <tbody>
                         <?php
                         $result = $db->query('SELECT DISTINCTROW * FROM maintenance m,affectermaintenance a WHERE a.id_user = "'.$id_user.'" AND m.id = a.id_maintenance ');
-                        $i = 0;
                         while ($row = $result->fetch()) {
-                            $i++;
+                            // RETOURNE TOUTES LES OPERATIONS ASSOCIE A LUTILISATEUR EN SESSION
                             echo '
-                                <form id="ligne'.$i.'" action="listMaintenances.php?id='.$row['id'].'#ligne'.$i.'" method="post" class="form-horizontal">
+                                <form action="listMaintenances.php?id='.$row['id'].'" method="post" class="form-horizontal">
                                     <tr>
                                         <td class="center">' . $row['id'] . '</td>
                                         <td class="center">'.$row['dateDebut'].'</td>
@@ -124,6 +125,7 @@ if($role_user != "technicien")
                                         <td class="center"><input type="submit" class="btn btn-success" value="Enregistrer"></td>
                                     </tr>
                                 </form>';
+                                // REDIRECTION AVEC VOIR PLUS VERS LOPERATION ASSOCIÉE
                         }
                         ?>
                     </tbody>

@@ -1,7 +1,9 @@
 <html>
+    <title>Affecter un salarié</title>
 <?php
 require 'config/session.php';
 require 'header.php';
+// VERIFICATION DU ROLE
 if($role_user != "administrateur")
 {
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
@@ -18,6 +20,7 @@ if($role_user != "administrateur")
     <?php require_once 'navbar.php'; ?>
 
     <div class="container">
+        <!--- AFFECTER UN SALARIE -->
         <div class="card margintop25">
             <div class="card-header">
                 <strong>Ajouter un nouveau salarié</strong>
@@ -49,6 +52,7 @@ if($role_user != "administrateur")
                     <input type="submit" class="btn btn-success btn_valider" value="Valider">
                 </form>
                 <?php
+                // TRAITEMENT PHP
 
                 if (isset($_GET['insert'])) {
                     $category = $_POST['select_new_category'];
@@ -56,6 +60,7 @@ if($role_user != "administrateur")
 
                     if ($user != "" && $category != "") {
                         switch ($category) {
+                            // SI LA CATEGORIE EST POUR LE TECHNICIEN
                             case 1:
                                 $sql = "INSERT INTO `techniciens`(`id_user`) VALUES (?)";
                                 $requete = $db->prepare($sql);
@@ -65,6 +70,7 @@ if($role_user != "administrateur")
                                     Le technicien a été crée avec succés.
                                 </div>';
                                 break;
+                            // SI LA CATEGORIE EST POUR LE GESTIONNAIRE
                             case 2:
                                 $sql = "INSERT INTO `gestionnaires`(`id_user`) VALUES (?)";
                                 $requete = $db->prepare($sql);

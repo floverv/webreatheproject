@@ -1,4 +1,5 @@
 <html>
+    <title>Liste des véhicules</title>
 <?php
 require 'config/session.php';
 require 'function/check.php';
@@ -19,6 +20,7 @@ require 'header.php';
     <?php require_once 'navbar.php'; ?>
 
     <div class="container">
+        <!-- DIV CACHÉE POUR LA RECHERCHE DUN VEHICULE -->
         <div id="hidden_block"class="jumbotron margintop25" style="display:none;">
             <form action="showVehicule.php" method="GET">
                 <div class="form-group">
@@ -30,6 +32,7 @@ require 'header.php';
                 <input type="submit" class="btn btn-primary" value="Rechercher">
             </form>
         </div>
+        <!-- FIN DE LA DIV -->
         
         <div class="card margintop25">
             <div class="card-header">
@@ -51,6 +54,7 @@ require 'header.php';
                             <?php
                             $result = $db->query('SELECT * FROM vehicules');
                             while ($row = $result->fetch()) {
+                                // RETOURNE TOUS LES VEHICULES DE LA BDD
                                 echo '
                                 <tr>
                                     <td class="center">' . $row['immatriculation'] . '</td>
@@ -58,6 +62,7 @@ require 'header.php';
                                     <td class="center">'.$row['dateAchat'].'</td>
                                     <td class="center"><a href="showVehicule.php?immat='.$row['immatriculation'].'" class="btn btn-primary">Voir plus</a></td>
                                 </tr>';
+                                // BOUTTON VOIR PLUS REDIRECTION VERS LA PAGE DE LA VOITURE ASSOCIÉE
                             }
                             ?>
                         </tbody>

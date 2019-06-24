@@ -1,9 +1,14 @@
 <html>
+    <title>Ajout d'un véhicule</title>
 <?php
 require 'config/session.php';
 require 'header.php';
+
+// verification du role de gestionnaire
+
 if($role_user != "gestionnaire")
 {
+    // sinon redirection 
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
     die();
 }
@@ -20,6 +25,7 @@ Variables:
     <div class="container">
         <?php
             if(isset($_GET['insert'])){
+                //INITIALISATION DU PATTERN
                 $pattern_immat = "#[A-HJ-NP-TVX-Z]{2}-[0-9]{3}-[A-HJ-NP-TVX-Z]{2}#";
                 $pattern_date = "#[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])#";
                 
@@ -27,12 +33,15 @@ Variables:
                 $type = $_POST['type'];
                 $date_achat = $_POST['date_achat'];
 
+                // VERIFICATION QUE CE NEST PAS NUL ET QUE LE PATTERN FONCTIONNE
                 if($immat=="" || $type=="" || $date_achat == "" || !preg_match($pattern_immat,$immat) || !preg_match($pattern_date,$date_achat) )
                 {
+                    //REDIRECTION
                     echo "<script type='text/javascript'>window.location.href='addVehicule.php';</script>";
                     die();
                 }
                 else{
+                    // INSERTION DANS LA BDD
                     $requete = $db->prepare("INSERT INTO `vehicules`(`immatriculation`, `type`, `dateAchat`) VALUES(?,?,?)");
                     $requete->execute([$immat,$type,$date_achat]);
 
@@ -71,6 +80,7 @@ Variables:
 
         <?php
 
+            // SI GET RECOIT UNE IMMAT ALORS SUPPRIMER DANS LA BASE CETTE IMMATRICULATION
             if(isset($_GET['immat']))
             {
                 $immat = $_GET['immat'];
@@ -102,6 +112,7 @@ Variables:
                     </thead>
                     <tbody>
                         <?php
+                        // RETOURNE TOUS LES VEHICULES
                         $result = $db->query('SELECT * from vehicules');
                         $i = 0;
                         while ($row = $result->fetch()) {

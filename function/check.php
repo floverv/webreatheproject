@@ -1,4 +1,5 @@
 <?php
+// VERIFIER SI LA NOTE EXISTE DEJA POUR LA CREER OU LA MODIFIER
 function checkNote($id_m,$id_u)
 {
     require 'config/dbconnect.php';
@@ -19,6 +20,7 @@ function checkNote($id_m,$id_u)
     return $check;
 }
 
+// VERIFIER SI LA PLAQUE EXISTE
 function checkImmat($immat)
 {
     require 'config/dbconnect.php';
@@ -39,6 +41,7 @@ function checkImmat($immat)
     return $check;
 }
 
+// VERIFIER SI LOPERATION DE MAINTENANCE EEXISTE
 function checkOperation($id)
 {
     require 'config/dbconnect.php';

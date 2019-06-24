@@ -1,4 +1,5 @@
 <html>
+    <title>WE BREATHE</title>
 <?php
 require 'config/session.php';
 require 'header.php';

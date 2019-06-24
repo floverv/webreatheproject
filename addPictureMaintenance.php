@@ -1,8 +1,12 @@
 <html>
+    <title>Ajout d'une photo</title>
 <?php
 require 'config/session.php';
 require 'function/check.php';
 require 'header.php';
+
+// VERIFICATION DU ROLE DE TECHNICIEN 
+
 if ($role_user != "technicien") {
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
     die();
@@ -16,12 +20,14 @@ if ($role_user != "technicien") {
 
 <body>
     <?php require_once 'navbar.php';
-    echo'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">';
     ?>
 
     <div class="container">
         
-        <?php if(isset($_GET['insert'])){include 'treatmentPicture.php';} ?>
+        <?php 
+        // SI LE FICHIER A ETE ENVOYE REDIRECTION VIA LE TRAITEMENT
+        if(isset($_GET['insert'])){include 'treatmentPicture.php';} 
+        ?>
 
         <div class="card margintop25">
             <div class="card-header">
@@ -34,6 +40,7 @@ if ($role_user != "technicien") {
                         <select class="form-control" name="select_sujet" required>
                             <option value="">Choisir une opération</option>
                             <?php
+                            // AFFICHAGE UNIQUEMENT DES OPERATIONS AFFECTER A L'UTILISATEUR
                             $sql = "SELECT DISTINCT m.id,m.sujet
                             FROM maintenance m,affectermaintenance a
                             WHERE m.id = a.id_maintenance 

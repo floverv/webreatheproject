@@ -1,4 +1,5 @@
 <html>
+    <title>Ajouter note à une maintenance</title>
 <?php
 require 'config/session.php';
 require 'function/check.php';
@@ -54,6 +55,7 @@ if ($role_user != "technicien") {
                         <select class="form-control" name="select_sujet" required>
                             <option value="">Choisir une opération</option>
                             <?php
+                            // AFFICHAGE DES OPERATIONS AFFECTER A L'UTILISATEUR
                             $sql = "SELECT DISTINCT m.id,m.sujet
                             FROM maintenance m,affectermaintenance a
                             WHERE m.id = a.id_maintenance 

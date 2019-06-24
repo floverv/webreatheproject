@@ -1,19 +1,27 @@
 <html>
+    <title>Page de la maintenance</title>
 <?php
 require 'config/session.php';
 require 'function/check.php';
 require 'header.php';
+
+// SI LE ROLE EST UN TECHNICIEN 
+
+
 if ($role_user != "technicien") {
+    //SINON REDIRECTION
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
     die();
 }
 
+// SI ON OBTIENT L'ID ALORS ON LAFFECTE A UNE VARIABLE SINON ON REDIRIGE
 if (isset($_GET['id'])) {
     $id_maintenance = $_GET['id'];
 } else {
     echo "<script type='text/javascript'>window.location.href='listMaintenances.php';</script>";
     die();
 }
+
 /* 
         Variables:
             $id_user : id de l'utilisateur connecté,
@@ -27,16 +35,19 @@ if (isset($_GET['id'])) {
     
 
     <div class="container">
-    <?php if(!checkOperation($id_maintenance)){
+    
+    <?php 
+        // SI L'ID RECU EST INTROUVABLE DANS LA BASE DE DONNES
+        if(!checkOperation($id_maintenance)){
         echo '<div class="alert alert-danger margintop25" role="alert">Opération de maintenance introuvable.</div>';
         die();}
     ?>
         <!--- OPERATION DE MAINTENANCE ----------->
         <div id="operation">
 
-
             <?php
 
+            // SI ON DOIT MODIFIER UNE OPERATION 
             if (isset($_GET['edit'])) {
                 $id_maintenance = $_GET['id'];
                 $dateDebut = $_POST['dateDebut'];
@@ -76,6 +87,7 @@ if (isset($_GET['id'])) {
                                 <?php
                                 $result = $db->query('SELECT * FROM maintenance WHERE id = "' . $id_maintenance . '"');
                                 while ($row = $result->fetch()) {
+                                    //AFFICHAGE DE LA MAINTENANCE ASSOCIES A L'ID MAINTENANCE
                                     echo '
                                     <form action="showMaintenance.php?edit&id=' . $id_maintenance . '#ligne" method="post" class="form-horizontal">
                                         <tr>
@@ -101,10 +113,12 @@ if (isset($_GET['id'])) {
                 </section>
             </div>
         </div>
+        <!--- FIN OPERATION DE MAINTENANCE ----------->
 
         <!-- LISTE DES PIECES NECESSAIRES ------------->
         <div id="piece">
             <?php
+                // SUPPRIMER UNE PIECES DE LOPERATION
                 if (isset($_GET['id_piece'])) {
                     $id_piece = $_GET['id_piece'];
 
@@ -112,6 +126,7 @@ if (isset($_GET['id'])) {
                     echo '<div class="alert alert-success margintop25" role="alert">La pièce a bien été supprimée.</div>';
                 }
 
+                // AJOUT DUNE PIECE A LOPERATION
                 if (isset($_GET['addPiece'])) {
                     $i = 0;
 
@@ -126,6 +141,7 @@ if (isset($_GET['id'])) {
                             $select_piece = "";
                         }
 
+                        // SI LA PIECE EXISTE ALORS INSERTION DANS LA BASE
                         if ($select_piece != "") {
                             $sql = "INSERT INTO `listepieces`(`id_pieces`, `id_maintenance`) VALUES (?,?)";
                             $requete = $db->prepare($sql);
@@ -134,10 +150,7 @@ if (isset($_GET['id'])) {
                         $i++;
                     }
 
-                    echo '
-                            <div class="alert alert-success margintop25" role="alert">
-                                Les pièces ont été rajoutés avec succès.
-                            </div>';
+                    echo '<div class="alert alert-success margintop25" role="alert">Les pièces ont été rajoutés avec succès.</div>';
                 }
 
             ?>
@@ -159,8 +172,8 @@ if (isset($_GET['id'])) {
                             <tbody>
                                 <?php
                                 $result = $db->query('SELECT DISTINCT l.id_pieces,p.libelle FROM maintenance m,listepieces l,pieces p WHERE m.id = l.id_maintenance AND l.id_maintenance = "' . $id_maintenance . '" AND p.id = l.id_pieces ');
-                                $i = 0;
                                 while ($row = $result->fetch()) {
+                                    // AFFICHAGE DES PIECES AFFECTER A LOPERATION
                                     echo '
                                         <form action="showMaintenance.php?id=' . $id_maintenance . '&id_piece=' . $row['id_pieces'] . '#piece" method="post" class="form-horizontal">
                                             <tr>
@@ -181,9 +194,11 @@ if (isset($_GET['id'])) {
                         <select id="select_piece" style="margin-bottom:10px;" class="form-control" name="select_piece[]">
                             <option value="">Choisir une pièce</option>
                             <?php
+                            // RAJOUTER UNE OU PLUSIEURS PIECES POUR LOPERATION 
                             $sql = "SELECT * FROM pieces";
                             $result = $db->query($sql);
                             while ($row = $result->fetch()) {
+                                // RETOURNE TOUTES LES PIECES EXISTANTES
                                 echo '<option value="' . $row['id'] . '">' . $row['libelle'] . '</option>';
                             }
                             ?>
@@ -195,9 +210,9 @@ if (isset($_GET['id'])) {
                 </section>
             </div>
         </div>
+        <!-- FIN LISTE DES PIECES NECESSAIRES ------------->
 
         <!-- LISTE DES UTILISATEURS AFFECTÉ ------------->
-
         <div id="user">
             <?php
             if (isset($_GET['user'])) {
@@ -222,6 +237,7 @@ if (isset($_GET['id'])) {
                     }
 
                     if ($select_user != "") {
+                        // SI LUTILISATEUR EXISTE ALORS AJOUTER DANS LA TABLE AFFECTER
                         $sql = "INSERT INTO `affectermaintenance`(`id_user`, `id_maintenance`) VALUES (?,?)";
                         $requete = $db->prepare($sql);
                         $requete->execute([$_POST['select_user'][$i], $id_maintenance]);
@@ -229,10 +245,7 @@ if (isset($_GET['id'])) {
                     $i++;
                 }
 
-                echo '
-                        <div class="alert alert-success margintop25" role="alert">
-                            Les utilisateurs ont été rajoutés avec succès.
-                        </div>';
+                echo '<div class="alert alert-success margintop25" role="alert">Les utilisateurs ont été rajoutés avec succès.</div>';
             }
             ?>
 
@@ -252,12 +265,15 @@ if (isset($_GET['id'])) {
                             </thead>
                             <tbody>
                                 <?php
+
                                 $result = $db->query('SELECT DISTINCT a.id_user,u.name 
                                 FROM techniciens t,users u,affectermaintenance a,maintenance m
                                 WHERE a.id_user = t.id_user 
                                 AND a.id_user = u.id
                                 AND a.id_maintenance = "' . $id_maintenance . '" ');
+
                                 while ($row = $result->fetch()) {
+                                    //AFFICHAGE DES TECHNICIENS AFFECTE A LA MAINTENANCE
                                     echo '
                                         <form action="showMaintenance.php?id=' . $id_maintenance . '&user=' . $row['id_user'] . '#user" method="post" class="form-horizontal">
                                             <tr>
@@ -277,10 +293,11 @@ if (isset($_GET['id'])) {
                         <select id="select_user" style="margin-bottom:10px;" class="form-control" name="select_user[]">
                             <option value="">Choisir un technicien</option>
                             <?php
-                            $sql = "SELECT t.id_user,u.name from techniciens t,users u WHERE t.id_user = u.id ORDER BY u.name ASC ";
-                            $result = $db->query($sql);
-                            while ($row = $result->fetch()) {
-                                echo '<option value="' . $row['id_user'] . '">' . $row['name'] . '</option>';
+                                // AFFICHE LA LISTE DES TECHNICIENS
+                                $sql = "SELECT t.id_user,u.name from techniciens t,users u WHERE t.id_user = u.id ORDER BY u.name ASC ";
+                                $result = $db->query($sql);
+                                while ($row = $result->fetch()) {
+                                    echo '<option value="' . $row['id_user'] . '">' . $row['name'] . '</option>';
                             }
                             ?>
                         </select>
@@ -292,9 +309,9 @@ if (isset($_GET['id'])) {
             </div>
 
         </div>
+         <!-- FIN LISTE DES UTILISATEURS AFFECTÉ ------------->
 
         <!-- LISTE DES NOTES ATTRIBUÉES ------------->
-
         <div id="note">
             <div class="card margintop25">
                 <div class="card-header">
@@ -314,6 +331,7 @@ if (isset($_GET['id'])) {
                             <tbody>
                                 <?php
 
+                                // REQUETE SQL QUI AFFICHE LES NOTES DES TECHNICIENS EFFECTE
                                 $result = $db->query('SELECT DISTINCT n.note,u.name,n.id_technicien
                                 FROM techniciens t,users u,notemaintenance n,affectermaintenance a
                                 WHERE u.id = t.id_user
@@ -323,10 +341,13 @@ if (isset($_GET['id'])) {
                                 AND n.id_maintenance = '.$id_maintenance.'');
 
                                 while ($row = $result->fetch()) {
-                                    $echo = false;
+
+                                    $echo = false; // AFFICHAGE A FALSE
+
+                                    // SI LE TECHNICIEN CONNECTE CORRESPOND A LA NOTE QU'IL A RAJOUTE
                                     if($row['id_technicien'] == $id_user)
-                                    {
-                                        $echo = true;
+                                    {   
+                                        $echo = true; // AFFICHAGE A TRUE
                                     }
                                     echo '
                                     <tr>
@@ -334,6 +355,7 @@ if (isset($_GET['id'])) {
                                         <td class="center">' . $row['note']  . ' / 5</td>';
                                         if($echo)
                                         {
+                                            // SI LAFFICHAGE EST A TRUE ALORS AFFICHER LE BOUTON MODIFIER
                                             echo'<td class="center"><a href="addNoteMaintenance.php" class="btn btn-primary">Modifier</a></td>';
                                         }
                                     echo'</tr>';
@@ -345,16 +367,19 @@ if (isset($_GET['id'])) {
                 </section>
             </div>
         </div>
+        <!-- FIN LISTE DES NOTES ATTRIBUÉES ------------->
 
         <!-- LISTE DES IMAGES ------------->
 
         <div id="picture" style="margin-bottom : 50px;">
             <?php
+                // SUPPRIMER UNE IMAGE DE LA LISTE 
                 if(isset($_GET['delete']))
                 {
                     
-                    $id_picture = $_GET['delete'];        
+                    $id_picture = $_GET['delete'];       // INITIALISATION DE LID 
 
+                    //SI LID NEST PAS VIDE ALORS SUPPRIMER DE LA BASE
                     if($id_picture != ""){
                         $db->query("DELETE FROM photomaintenance WHERE id='".$id_picture."' ");
 
@@ -388,6 +413,7 @@ if (isset($_GET['id'])) {
                                 AND p.id_maintenance = '.$id_maintenance.'');
 
                                 while ($row = $result->fetch()) {
+                                    // RETOURNE TOUTES LES IMAGES ASSOCIÉES à LOPERATION 
                                     echo '
                                     <tr>
                                         <td class="center">' . $row['name'] . '</td>
@@ -402,6 +428,8 @@ if (isset($_GET['id'])) {
                 </section>
             </div>
         </div>
+
+        <!-- FIN LISTE DES IMAGES ------------->
 
     </div>
 </body>

@@ -1,3 +1,4 @@
+<!-- NAV BAR DU SITE -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="home.php">WeBreathe</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,6 +11,7 @@
                 <a class="nav-link" href="home.php">Accueil <span class="sr-only">(current)</span></a>
             </li>
             <?php
+                // LIEN ACCESSIBLE UNIQUEMENT POUR LES ADMINISTRATEURS
                 if($role_user == "administrateur")
                 {
                     echo'<li class="nav-item">
@@ -22,12 +24,14 @@
                             <a class="nav-link" href="addUser.php">Créer un salarié</a>
                         </li>';
                 }
+                // LIEN ACCESSIBLE UNIQUEMENT POUR LES GESTIONNAIRES
                 if($role_user == "gestionnaire")
                 {
                     echo'<li class="nav-item">
                             <a class="nav-link" href="addVehicule.php">Gestion des véhicules</a>
                         </li>';
                 }
+                // LIEN ACCESSIBLE UNIQUEMENT POUR LES TECHNICIENS
                 if($role_user == "technicien")
                 {
                     echo'<li class="nav-item">
@@ -58,7 +62,7 @@
                 }
                 ?>
         </ul>
-        <?php echo '<a>'.ucfirst($role_user).'</a>';?>
-        <a href="config/deconnexion.php" class="btn btn-danger" style="margin-left:15px;">Déconnection</a>
+        <?php echo '<a>'.ucfirst($role_user).'</a>'; //AFFICHAGE DU ROLE?>
+        <a href="config/deconnexion.php" class="btn btn-danger" style="margin-left:15px;">Déconnexion</a>
     </div>
 </nav>

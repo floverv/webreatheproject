@@ -1,4 +1,5 @@
 <html>
+    <title>Liste des employées</title>
 <?php
 require 'config/session.php';
 require 'header.php';
@@ -19,8 +20,12 @@ if($role_user != "administrateur")
 
     <div class="container">
         <?php
+        // SI L'ID D'UN TECHNICIEN EST RECU AVEC GET SUPPRIMER L'ID
         if (isset($_GET['tech_id'])) {
+
             $id = $_GET['tech_id'];
+
+            //SUPPRESSION DANS LA BDD
             if ($db->query('DELETE FROM techniciens WHERE id_user="' . $id . '" ')) {
                 echo '
                     <div class="alert alert-success margintop25" role="alert">
@@ -28,8 +33,13 @@ if($role_user != "administrateur")
                     </div>';
             }
         }
+
+        // SI L'ID D'UN GESTIONNAIRE EST RECU AVEC GET SUPPRIMER L'ID
         if (isset($_GET['gest_id'])) {
+
             $id = $_GET['gest_id'];
+
+            //SUPPRESSION DANS LA BDD
             if ($db->query('DELETE FROM gestionnaires WHERE id_user="' . $id . '" ')) {
                 echo '
                     <div class="alert alert-success margintop25" role="alert">
@@ -37,6 +47,7 @@ if($role_user != "administrateur")
                     </div>';
             }
         }
+
         ?>
         <div class="card margintop25">
             <div class="card-header">
@@ -54,9 +65,8 @@ if($role_user != "administrateur")
                     <tbody>
                         <?php
                         $result = $db->query('SELECT t.id_user,u.name from techniciens t,users u WHERE t.id_user = u.id ORDER BY u.name ASC ');
-                        $i = 0;
+                        // RETOURNE TOUS LES TECHNICIENS PAR ORDER ALPHABETIQUE
                         while ($row = $result->fetch()) {
-                            $i++;
                             echo '
                                 <form action="listEmployees.php?tech_id=' . $row['id_user'] . '" method="post" class="form-horizontal">
                                     <tr>
@@ -88,9 +98,8 @@ if($role_user != "administrateur")
                     <tbody>
                         <?php
                         $result = $db->query('SELECT g.id_user,u.name from gestionnaires g,users u WHERE g.id_user = u.id ORDER BY u.name ASC');
-                        $i = 0;
+                        // RETOURNE TOUS LES GESTIONNAIRES PAR ORDER ALPHABETIQUE
                         while ($row = $result->fetch()) {
-                            $i++;
                             echo '
                                 <form action="listEmployees.php?gest_id=' . $row['id_user'] . '" method="post" class="form-horizontal">
                                     <tr>

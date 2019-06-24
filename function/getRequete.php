@@ -1,4 +1,5 @@
 <?php
+// RETOURNE LA RAISON DU PROBLEME AVEC SON ID
 function getSujetProbleme($id)
 {
     require 'config/dbconnect.php';
@@ -11,6 +12,7 @@ function getSujetProbleme($id)
     return $result['raison'];
 }
 
+// RETOURNE L'ID DE LA MAINTENANCE QUI VIENT DETRE CREER
 function getIdMaintenance($id_probleme,$dateDebut,$dateFin)
 {
     require 'config/dbconnect.php';

@@ -1,9 +1,15 @@
 <html>
+    <title>Création d'un utilisateur</title>
 <?php
 require 'config/session.php';
 require 'header.php';
+
+// VERIFICATION DU ROLE DE L'ADMINISTRATEUR
+
+
 if($role_user != "administrateur")
 {
+    //REDIRECTION SI CEST PAS UN ADMIN
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
     die();
 }
@@ -26,11 +32,17 @@ if($role_user != "administrateur")
             $prenom = $_POST['prenom'];
             $email = $_POST['mail'];
             $password = $_POST['password'];
-            $sql = "INSERT INTO `users`(`email`, `name`, `prenom`, `password`) VALUES (?,?,?,?)";
-            $requete = $db->prepare($sql);
-            $requete->execute([$email,$name,$prenom,$password]);
 
-            echo '<div class="alert alert-success margintop25" role="alert">L\'utilisateur a été crée avec succés.</div>';
+            // SI LES VARIABLES NE SONT PAS NULL ALORS INSERTION DANS LA BASE
+            if($name != "" && $prenom!= "" & $email="" & $password!="")
+            {
+                $sql = "INSERT INTO `users`(`email`, `name`, `prenom`, `password`) VALUES (?,?,?,?)";
+                $requete = $db->prepare($sql);
+                $requete->execute([$email,$name,$prenom,$password]);
+
+                echo '<div class="alert alert-success margintop25" role="alert">L\'utilisateur a été crée avec succés.</div>';
+            }
+ 
         }
 
         ?>

@@ -1,9 +1,14 @@
 <html>
+    <title>Ajouter une maintenance</title>
 <?php
 require 'config/session.php';
 require 'function/check.php';
 require 'function/getRequete.php';
 require 'header.php';
+
+// VERIFICATION DU ROLE DE TECHNICIEN 
+
+
 if ($role_user != "technicien") {
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
     die();
@@ -79,6 +84,7 @@ if ($role_user != "technicien") {
                     $i++;
                 }
 
+                // AJOUT DE LUTILISATEUR QUI A RAJOUTER LOPERATION DANS LA TABLE AFFETCER
                 $sql = 'INSERT INTO `affectermaintenance`(`id_user`, `id_maintenance`) VALUES (?,?)';
                 $requete = $db->prepare($sql);
                 $requete->execute([$id_user,$id_maintenance]);
@@ -113,6 +119,7 @@ if ($role_user != "technicien") {
                         <select class="form-control" name="select_sujet" required>
                             <option value="">Choisir un sujet</option>
                             <?php
+                            // fetch de tous les problemes vehicules
                             $sql = "SELECT * FROM problemevehicule";
                             $result = $db->query($sql);
                             while ($row = $result->fetch()) {
@@ -130,10 +137,11 @@ if ($role_user != "technicien") {
                         <select id="select_piece" style ="margin-bottom:10px;" class="form-control" name="select_piece[]">
                             <option value="">Choisir une pièce</option>
                             <?php
+                            // fetch de toutes les pièces existantes
                             $sql = "SELECT * FROM pieces";
                             $result = $db->query($sql);
                             while ($row = $result->fetch()) {
-                                echo '<option value="' . $row['id'] . '">' . $row['libelle'] .'</option>';
+                                echo '<option value="' . $row['id'] . '">' . $row['id'] . ' - ' . $row['libelle'] .'</option>';
                             }
                             ?>
                         </select>

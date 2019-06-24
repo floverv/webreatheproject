@@ -1,18 +1,22 @@
 <html>
+    <title>Page du véhicule</title>
 <?php
 require 'config/session.php';
 require 'function/check.php';
 require 'header.php';
-/*if($role_user != "technicien")
+
+if($role_user != "technicien")
 {
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
     die();
 }
  
-        Variables:
-            $id_user : id de l'utilisateur connecté,
-            $role_user : role de l'utilisateur connecté
-        */
+/*  Variables:
+        $id_user : id de l'utilisateur connecté,
+        $role_user : role de l'utilisateur connecté
+        $immat : immatriculation du véhicule
+*/
+        
 ?>
 
 <body>
@@ -20,9 +24,11 @@ require 'header.php';
 
     <div class="container">
         <?php
+            // SI ON RECOIT UNE IMMATRICULATION SINON REDIRECTION
             if(isset($_GET['immat']))
             {
                 $immat = $_GET['immat'];
+                // VERIFIER SI L'IMMATRICULATION EXISTE DANS LA BDD SINON MSG D'ERREUR
                 if(!checkImmat($immat))
                 {
                     echo '<div class="alert alert-danger margintop25" role="alert">Le véhicule est introuvable.</div>';
@@ -52,6 +58,7 @@ require 'header.php';
                             <?php
                             $result = $db->query('SELECT * FROM vehicules WHERE immatriculation = "'.$immat.'"');
                             while ($row = $result->fetch()) {
+                                // retourne LE VEHICULE AVEC LA PLAQUE EN PARAMETRE
                                 echo '
                                 <tr>
                                     <td class="center">' . $row['immatriculation'] . '</td>
@@ -85,15 +92,18 @@ require 'header.php';
                         </thead>
                         <tbody>
                             <?php
+
                             $result = $db->prepare('SELECT m.id,m.dateDebut,m.dateFin,m.sujet,m.etatAvancement
                             FROM maintenance m,problemevehicule p
                             WHERE m.id_probleme=p.id
                             AND	p.immatriculation = ? 
                             ORDER BY m.dateFin desc
                             ');
+
                             $result->execute([$immat]);
 
                             while ($row = $result->fetch()) {
+                                // RETOURNE LA LISTE DES OPERATIONS AFFECTE A CE VEHICULE
                                 echo '
                                 <tr>
                                     <td class="center">' . $row['id'] . '</td>

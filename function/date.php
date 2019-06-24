@@ -1,30 +1,36 @@
 <?php
+
+// RETOURNE LE MOIS ASSOCIER A SON NUMERO
 function getMonth($month)
 {
-    switch($month){
-        case 01:
-            return "Janvier";
-            break;
-        case 02:
-            return "Fevrier";
-            break;
-        case 03:
-            return "Mars";
-            break;
-        case 04:
-            return "Avril";
-            break;
-        case 05:
-            return "Mai";
-            break;
-        case 06:
-            return "Juin";
-            break;
-        case 07:
-            return "Juillet";
-            break;
+    if($month == '01')
+    {
+        return "Janvier";
     }
-
+    if($month == '02')
+    {
+        return "Février";
+    }
+    if($month == '03')
+    {
+        return "Mars";
+    }
+    if($month == '04')
+    {
+        return "Avril";
+    }
+    if($month == '05')
+    {
+        return "Mai";
+    }
+    if($month == '06')
+    {
+        return "Juin";
+    }
+    if($month == '07')
+    {
+        return "Juillet";
+    }
     if($month == '08')
     {
         return "Août";
