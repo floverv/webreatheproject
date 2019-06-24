@@ -4,6 +4,9 @@
 require 'config/session.php';
 require 'function/check.php';
 require 'header.php';
+
+// SI LE TECHNICIEN EST CONNECTE
+
 if ($role_user != "technicien") {
     echo "<script type='text/javascript'>window.location.href='home.php';</script>";
     die();
@@ -16,30 +19,32 @@ if ($role_user != "technicien") {
 ?>
 
 <body>
-    <?php require_once 'navbar.php'; ?>
-
-    <?php
 
     
-    if(isset($_GET['insert'])){
-        $note = $_POST['select_note'];
-        $id_maintenance = $_POST['select_sujet'];
 
-        /* SI LE TECHNICIEN A DEJA MIS UNE NOTE */
-        if(checkNote($id_maintenance,$id_user))
-        {
-            $sql = "UPDATE `notemaintenance` SET `note`=? WHERE id_maintenance = ? AND id_technicien = ?";
-            $requete = $db->prepare($sql);
-            $requete->execute([$note,$id_maintenance,$id_user]);
-        } 
-        /* SI LE TECHNICIEN N'A JAMAIS MIT DE NOTE*/
-        else{
-            $sql = "INSERT INTO `notemaintenance`(`note`, `id_maintenance`, `id_technicien`) VALUES (?,?,?)";
-            $requete = $db->prepare($sql);
-            $requete->execute([$note,$id_maintenance,$id_user]);
+    <?php 
+    
+        require_once 'navbar.php';
+ 
+        if(isset($_GET['insert'])){
+            $note = $_POST['select_note'];
+            $id_maintenance = $_POST['select_sujet'];
+
+            /* SI LE TECHNICIEN A DEJA MIS UNE NOTE */
+            if(checkNote($id_maintenance,$id_user))
+            {
+                $sql = "UPDATE `notemaintenance` SET `note`=? WHERE id_maintenance = ? AND id_technicien = ?";
+                $requete = $db->prepare($sql);
+                $requete->execute([$note,$id_maintenance,$id_user]);
+            } 
+            /* SI LE TECHNICIEN N'A JAMAIS MIT DE NOTE*/
+            else{
+                $sql = "INSERT INTO `notemaintenance`(`note`, `id_maintenance`, `id_technicien`) VALUES (?,?,?)";
+                $requete = $db->prepare($sql);
+                $requete->execute([$note,$id_maintenance,$id_user]);
+            }
+            echo "<script type='text/javascript'>window.location.href='showMaintenance?id=".$id_maintenance."#note';</script>";        
         }
-        echo "<script type='text/javascript'>window.location.href='showMaintenance?id=".$id_maintenance."#note';</script>";        
-    }
     ?>
 
     <div class="container">

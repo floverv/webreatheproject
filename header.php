@@ -11,7 +11,7 @@
 
         <link rel="stylesheet" href="asset/main.css">
 
-        <link rel="stylesheet" href="vendor/bulma/bulma.min.css">
+        <link rel="stylesheet" type="text/css" href="vendor/bulma/bulma.min.css"/>
         
         <script src="vendor/js/Chart.js"></script>
     </head>

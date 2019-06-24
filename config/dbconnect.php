@@ -1,6 +1,6 @@
 <?php
 
-// CONNEXION A LA BASE 
+// CONNEXION A LA BASE DE DONNÉES
 try{
     $db = new PDO('mysql:host=localhost; dbname=webreathe','root','');
 }
@@ -10,7 +10,7 @@ catch (Exception $e)
 }
 
 // CHEMIN POUR HÉBERGER LES FICHIERS EN LOCAL POUR LES OPERATIONS
-$host = 'http://localhost/projetWeBreathe/';
+$host = 'http://localhost/webreatheproject/';
 $img_path = 'common/Pictures/Maintenance/';
 
 // INITIALISISER LA DATE POUR TOUTES LES PAGES
